@@ -9,10 +9,14 @@ namespace SalesWebMvc.Models
     public class Seller
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
+        [StringLength(maximumLength: 60, MinimumLength = 3, ErrorMessage = "{0} size shoud be {1} to {2}")]
         public string Name { get; set; }
 
         [Display(Name = "E-Mail")]
         [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Enter a valid email")]
         public string Email { get; set; }
 
         [Display(Name = "Birth Date")]
@@ -22,6 +26,7 @@ namespace SalesWebMvc.Models
 
         [Display(Name = "Base Salary")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
+        [Range(100.0, 50000.0, ErrorMessage = "{0} must be from {1} to {2}")]
         public double BaseSalary { get; set; }
 
         public Department Department { get; set; }
